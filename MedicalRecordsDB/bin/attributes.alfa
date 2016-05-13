@@ -1,0 +1,50 @@
+namespace accessControl{
+	namespace attributes{
+		namespace subject{
+			attribute role{
+				category = subjectCat
+				id = "role"
+				type = string
+			}
+			attribute state{
+				category = subjectCat
+				id = "state"
+				type = string
+			}
+			attribute specialty{
+				category = subjectCat
+				id = "specialty"
+				type = string
+			}
+			attribute recordID{
+				category = subjectCat
+				id = "recordID"
+				type = string
+			}
+		}
+		namespace action{
+			attribute actionID{
+				category = actionCat
+				id = "actionID"
+				type = string
+			}
+		}
+		namespace resource{
+			attribute rType{
+				category = resourceCat
+				id = "rType"
+				type = string
+			}
+			attribute specialty{
+				category = resourceCat
+				id = "specialty"
+				type = string
+			}
+			attribute ID{
+				category = resourceCat
+				id = "ID"
+				type = string
+			}
+		}
+	}
+}

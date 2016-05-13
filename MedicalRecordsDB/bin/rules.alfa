@@ -1,0 +1,141 @@
+namespace accessControl{
+	import accessControl.attributes.*
+	/**
+	 * Doctors in the emergency room can view every Record
+	 */
+	rule DoctorViewRecordEmergency{
+		target clause subject.role=="doctor" and subject.state=="emergency"
+		permit
+	}
+	
+	/** 
+	 * Doctors can only view the entries of their speciality for a given Record
+	 * */
+	
+	rule DoctorViewRecord{
+		target clause subject.role=="doctor" and subject.state=="regular"
+		condition subject.specialty==resource.specialty
+		permit
+	}
+	/** 
+	 * Staff can not view Records
+	 * */
+	rule StaffViewRecord{
+		target clause subject.role=="staff"
+		deny
+	}
+	
+	/** 
+	 * A Patient can only view his Record
+	 * */
+	
+	rule PatientViewRecord{
+		target clause subject.role=="patient"
+		condition subject.recordID==resource.ID
+		permit
+	}
+	
+	/*
+	 * Staff can create Records
+	 */
+	rule StaffCreateRecord{
+		target clause subject.role=="staff"
+		permit
+	}
+	
+	/*
+	 * Doctor in the emergency room can create Records
+	 */
+	rule EmergencyCreateRecord{
+		target clause subject.role=="doctor" and subject.state=="emergency"
+		permit
+	}
+	
+	/*
+	 * Doctors can not create Records
+	 */
+	rule DoctorCreateRecord{
+		target clause subject.role=="doctor" and subject.state=="regular"
+		deny
+	}
+	
+	/*
+	 * Patient can not create Records
+	 */
+	rule PatientCreateRecord{
+		target clause subject.role=="patient"
+		deny
+	}
+	
+	/*
+	 * Doctors can create Entries
+	 */
+	rule DoctorCreateEntry{
+		target clause subject.role=="doctor"
+		permit
+	}
+	
+	/*
+	 * Staff can not create Entries
+	 */
+	rule StaffCreateEntry{
+		target clause subject.role=="staff"
+		deny
+	}
+	
+	/*
+	 * Patients can not create Entries
+	 */
+	rule PatientCreateEntry{
+		target clause subject.role=="patient"
+		deny
+	}
+	
+	/*
+	 * Doctors can create Profiles
+	 */
+	rule DoctorCreateProfile{
+		target clause subject.role=="doctor"
+		permit
+	}
+	
+	/*
+	 * Staff can not create Profiles
+	 */
+	rule StaffCreateProfile{
+		target clause subject.role=="staff"
+		permit
+	}
+	
+	/*
+	 * Patients can not create Profiles
+	 */
+	rule PatientCreateProfile{
+		target clause subject.role=="patient"
+		deny
+	}
+	
+	/*
+	 * Doctors can create Specialties
+	 */
+	rule DoctorCreateSpec{
+		target clause subject.role=="doctor"
+		permit
+	}
+	
+	/*
+	 * Staff can not create Specialties
+	 */
+	rule StaffCreateSpec{
+		target clause subject.role=="staff"
+		permit
+	}
+	
+	/*
+	 * Patients can not create Specialties
+	 */
+	rule PatientCreateSpec{
+		target clause subject.role=="patient"
+		deny
+	}
+}

@@ -1,0 +1,3 @@
+grant codeBase "file:C:/Users/Rui/Documents/GitHub/MedicalRecordsDB_Client/bin/-"{
+    permission java.security.AllPermission;
+};

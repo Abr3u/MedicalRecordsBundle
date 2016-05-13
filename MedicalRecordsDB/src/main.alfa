@@ -1,0 +1,52 @@
+namespace accessControl{
+	
+	import accessControl.attributes.*
+	
+	policyset main{
+		apply firstApplicable
+		viewRecords
+		createRecords
+		createEntries
+		createProfiles
+		createSpec
+	}
+	policy viewRecords{
+			target clause action.actionID=="view" and resource.rType=="record"
+			apply firstApplicable
+			DoctorViewRecordEmergency
+			DoctorViewRecord
+			StaffViewRecord
+			PatientViewRecord
+		}
+	policy createProfiles{
+		target clause action.actionID=="create" and resource.rType=="profile"
+		apply firstApplicable
+		StaffCreateProfile
+		DoctorCreateProfile
+		PatientCreateProfile
+	}
+		
+	policy createRecords{
+		target clause action.actionID=="create" and resource.rType=="record"
+		apply firstApplicable
+		StaffCreateRecord
+		DoctorCreateRecord
+		PatientCreateRecord
+	}
+	
+	policy createEntries{
+		target clause action.actionID=="create" and resource.rType=="entry"
+		apply firstApplicable
+		DoctorCreateEntry
+		StaffCreateEntry
+		PatientCreateEntry
+	}	
+	
+	policy createSpec{
+		target clause action.actionID=="create" and resource.rType=="specialty"
+		apply firstApplicable
+		DoctorCreateSpec
+		StaffCreateSpec
+		PatientCreateSpec
+	}
+}
